@@ -1,0 +1,15 @@
+Homefy.cl Documents:
+====================
+
+This repo contains:
+
+UML:
+-> BDD Diagram
+-> Chen Diagram
+-> Class Diagram
+-> Components Diagram
+-> Deployment Diagram
+-> Sequence Diagrams (Functional Requierements)
+
+DB DML:
+-> Homefy.cl_mysql_DML.sql
