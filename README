@@ -3,6 +3,11 @@ Homefy.cl Documents:
 
 This repo contains:
 
+UI:
+-> Sketchs
+-> Wireframes
+-> Mockups
+
 UML:
 -> BDD Diagram
 -> Chen Diagram
@@ -11,5 +16,5 @@ UML:
 -> Deployment Diagram
 -> Sequence Diagrams (Functional Requierements)
 
-DB DML:
+DB:
 -> Homefy.cl_mysql_DML.sql
