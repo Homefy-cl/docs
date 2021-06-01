@@ -1,14 +1,13 @@
-# noSQL Diagram
+# NOSQL
 
-# Complete Version:
-
+## Interaction Diagram:
 <p align="center">
 <img alt="nosql diagram"
         src="./noSQL - Interaction Diagram - Homefy.cl.png"
     />
 </p>
 
-# Simplified Version:
+## Simplified DB Diagram
 
 <p align="center">
 <img alt="nosql diagram"
