@@ -34,7 +34,7 @@ CREATE TABLE `invitation` (
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Comentario` (
+CREATE TABLE `comment` (
 	`id` int NOT NULL AUTO_INCREMENT,
 	`text` varchar(255) NOT NULL,
 	`date` DATETIME NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE `sale` (
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Promocion` (
+CREATE TABLE `promo` (
 	`id` varchar(5) NOT NULL,
 	`description` varchar(35) NOT NULL,
 	PRIMARY KEY (`id`)
@@ -119,7 +119,7 @@ CREATE TABLE `sale_category` (
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `ImagenVenta` (
+CREATE TABLE `imgSale` (
 	`id` bigint NOT NULL AUTO_INCREMENT,
 	`url` varchar(255) NOT NULL UNIQUE,
 	`idSale` int NOT NULL,
@@ -136,9 +136,9 @@ ALTER TABLE `user_community` ADD CONSTRAINT `user_community_fk1` FOREIGN KEY (`i
 
 ALTER TABLE `invitation` ADD CONSTRAINT `invitation_fk0` FOREIGN KEY (`idCommunity`) REFERENCES `community`(`id`);
 
-ALTER TABLE `Comentario` ADD CONSTRAINT `Comentario_fk0` FOREIGN KEY (`idPost`) REFERENCES `post`(`id`);
+ALTER TABLE `comment` ADD CONSTRAINT `comment_fk0` FOREIGN KEY (`idPost`) REFERENCES `post`(`id`);
 
-ALTER TABLE `Comentario` ADD CONSTRAINT `Comentario_fk1` FOREIGN KEY (`idUser`) REFERENCES `user`(`id`);
+ALTER TABLE `comment` ADD CONSTRAINT `comment_fk1` FOREIGN KEY (`idUser`) REFERENCES `user`(`id`);
 
 ALTER TABLE `post` ADD CONSTRAINT `post_fk0` FOREIGN KEY (`idCommunity`) REFERENCES `community`(`id`);
 
@@ -150,7 +150,7 @@ ALTER TABLE `announcement` ADD CONSTRAINT `announcement_fk0` FOREIGN KEY (`idPos
 
 ALTER TABLE `sale` ADD CONSTRAINT `sale_fk0` FOREIGN KEY (`idPost`) REFERENCES `post`(`id`);
 
-ALTER TABLE `sale` ADD CONSTRAINT `sale_fk1` FOREIGN KEY (`idPromo`) REFERENCES `Promocion`(`id`);
+ALTER TABLE `sale` ADD CONSTRAINT `sale_fk1` FOREIGN KEY (`idPromo`) REFERENCES `promo`(`id`);
 
 ALTER TABLE `commonExpenses` ADD CONSTRAINT `commonExpenses_fk0` FOREIGN KEY (`idCommunity`) REFERENCES `community`(`id`);
 
@@ -162,5 +162,5 @@ ALTER TABLE `sale_category` ADD CONSTRAINT `sale_category_fk0` FOREIGN KEY (`idS
 
 ALTER TABLE `sale_category` ADD CONSTRAINT `sale_category_fk1` FOREIGN KEY (`idCategory`) REFERENCES `category`(`id`);
 
-ALTER TABLE `ImagenVenta` ADD CONSTRAINT `ImagenVenta_fk0` FOREIGN KEY (`idSale`) REFERENCES `sale`(`id`);
+ALTER TABLE `imgSale` ADD CONSTRAINT `imgSale_fk0` FOREIGN KEY (`idSale`) REFERENCES `sale`(`id`);
 
