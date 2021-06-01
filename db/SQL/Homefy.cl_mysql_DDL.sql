@@ -1,167 +1,166 @@
-CREATE TABLE `Usuario` (
+CREATE TABLE `user` (
 	`id` int NOT NULL AUTO_INCREMENT,
-	`nombre` varchar(35) NOT NULL,
+	`name` varchar(35) NOT NULL,
 	`mail` varchar(255) NOT NULL UNIQUE,
 	`password` varchar(255) NOT NULL,
-	`idEstadoUsuario` int NOT NULL,
+	`picURL` varchar(255) NOT NULL,
+	`idUserState` varchar(5) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Comunidad` (
+CREATE TABLE `community` (
 	`id` int NOT NULL,
-	`nombre` varchar(35) NOT NULL,
-	`descripcion` varchar(255) NOT NULL,
-	`direccion` varchar(255) NOT NULL,
+	`maxResidents` int NOT NULL,
+	`name` varchar(35) NOT NULL,
+	`description` varchar(50) NOT NULL,
+	`direction` varchar(50) NOT NULL,
 	`idUsuarioAdministrador` int NOT NULL,
-	`idPlan` int NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Usuario_Comunidad` (
+CREATE TABLE `user_community` (
 	`id` int NOT NULL,
-	`idComunidad` int NOT NULL,
-	`idUsuario` int NOT NULL,
+	`idCommunity` int NOT NULL,
+	`idUser` int NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Invitacion` (
+CREATE TABLE `invitation` (
 	`id` int NOT NULL AUTO_INCREMENT,
-	`nombre` varchar(20) NOT NULL,
+	`name` varchar(20) NOT NULL,
 	`token` varchar(255) NOT NULL UNIQUE,
 	`urlQR` varchar(255) NOT NULL UNIQUE,
-	`idComunidad` int NOT NULL,
+	`idCommunity` int NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `Comentario` (
 	`id` int NOT NULL AUTO_INCREMENT,
-	`texto` varchar(255) NOT NULL,
-	`fecha` DATETIME NOT NULL,
-	`idPublicacion` int NOT NULL,
-	`idAutor` int NOT NULL,
+	`text` varchar(255) NOT NULL,
+	`date` DATETIME NOT NULL,
+	`idPost` int NOT NULL,
+	`idUser` int NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Publicacion` (
+CREATE TABLE `post` (
 	`id` int NOT NULL AUTO_INCREMENT,
-	`titulo` varchar(255) NOT NULL,
-	`descripcion` varchar(255) NOT NULL,
-	`fechaCreacion` DATETIME NOT NULL,
-	`idComunidad` int NOT NULL,
-	`idAutor` int NOT NULL,
-	`idVisibilidad` int NOT NULL,
+	`title` varchar(25) NOT NULL,
+	`text` varchar(255) NOT NULL,
+	`creationDate` DATETIME NOT NULL,
+	`idCommunity` int NOT NULL,
+	`idAuthor` int NOT NULL,
+	`idVisibility` varchar(5) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Aviso` (
+CREATE TABLE `announcement` (
 	`id` int NOT NULL,
 	`colorHex` varchar(7) NOT NULL,
-	`importancia` int(1) NOT NULL DEFAULT '1',
-	`idPublicacion` int NOT NULL,
+	`importance` tinyint NOT NULL DEFAULT '1',
+	`idPost` int NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Visibilidad` (
+CREATE TABLE `visibility` (
 	`id` varchar(5) NOT NULL,
 	`descripcion` varchar(20) NOT NULL UNIQUE,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Venta` (
+CREATE TABLE `sale` (
 	`id` int NOT NULL AUTO_INCREMENT,
-	`precio` int NOT NULL,
-	`idPublicacion` int NOT NULL,
-	`idPromocion` int NOT NULL,
+	`price` int NOT NULL,
+	`idPost` int NOT NULL,
+	`idPromo` varchar(5) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `Promocion` (
 	`id` varchar(5) NOT NULL,
-	`descripcion` varchar(35) NOT NULL,
+	`description` varchar(35) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Categoria` (
+CREATE TABLE `category` (
 	`id` varchar(5) NOT NULL,
-	`nombre` varchar(255) NOT NULL,
+	`name` varchar(255) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `GastoComun` (
+CREATE TABLE `commonExpenses` (
 	`id` int NOT NULL AUTO_INCREMENT,
-	`valorCobro` int NOT NULL,
-	`descripcion` varchar(255) NOT NULL,
-	`fechaCreacion` DATE NOT NULL,
-	`fechaVencimiento` DATE NOT NULL,
-	`idUsuarioAutor` int NOT NULL,
-	`idUsuarioDestinatario` int NOT NULL,
-	`idEstadoGastoComun` int NOT NULL,
+	`price` int NOT NULL,
+	`description` varchar(50) NOT NULL,
+	`creationDate` DATE NOT NULL,
+	`dueDate` DATE NOT NULL,
+	`idCommunity` int NOT NULL,
+	`idUser` int NOT NULL,
+	`idCommonExpenseState` varchar(5) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `EstadoGastoComun` (
+CREATE TABLE `commonExpenseState` (
 	`id` varchar(5) NOT NULL,
-	`descripcion` varchar(20) NOT NULL,
+	`description` varchar(20) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `EstadoUsuario` (
+CREATE TABLE `userState` (
 	`id` varchar(5) NOT NULL,
-	`descripcion` varchar(35) NOT NULL,
+	`description` varchar(35) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Venta_Categoria` (
+CREATE TABLE `sale_category` (
 	`id` int NOT NULL AUTO_INCREMENT,
-	`idVenta` int NOT NULL,
-	`idCategoria` int NOT NULL,
+	`idSale` int NOT NULL,
+	`idCategory` varchar(5) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `ImagenVenta` (
 	`id` bigint NOT NULL AUTO_INCREMENT,
 	`url` varchar(255) NOT NULL UNIQUE,
-	`idVenta` int NOT NULL,
+	`idSale` int NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-ALTER TABLE `Usuario` ADD CONSTRAINT `Usuario_fk0` FOREIGN KEY (`idEstadoUsuario`) REFERENCES `EstadoUsuario`(`id`);
+ALTER TABLE `user` ADD CONSTRAINT `user_fk0` FOREIGN KEY (`idUserState`) REFERENCES `userState`(`id`);
 
-ALTER TABLE `Comunidad` ADD CONSTRAINT `Comunidad_fk0` FOREIGN KEY (`idUsuarioAdministrador`) REFERENCES `Usuario`(`id`);
+ALTER TABLE `community` ADD CONSTRAINT `community_fk0` FOREIGN KEY (`idUsuarioAdministrador`) REFERENCES `user`(`id`);
 
-ALTER TABLE `Comunidad` ADD CONSTRAINT `Comunidad_fk1` FOREIGN KEY (`idPlan`) REFERENCES `PlanComunidad`(`id`);
+ALTER TABLE `user_community` ADD CONSTRAINT `user_community_fk0` FOREIGN KEY (`idCommunity`) REFERENCES `community`(`id`);
 
-ALTER TABLE `Usuario_Comunidad` ADD CONSTRAINT `Usuario_Comunidad_fk0` FOREIGN KEY (`idComunidad`) REFERENCES `Comunidad`(`id`);
+ALTER TABLE `user_community` ADD CONSTRAINT `user_community_fk1` FOREIGN KEY (`idUser`) REFERENCES `user`(`id`);
 
-ALTER TABLE `Usuario_Comunidad` ADD CONSTRAINT `Usuario_Comunidad_fk1` FOREIGN KEY (`idUsuario`) REFERENCES `Usuario`(`id`);
+ALTER TABLE `invitation` ADD CONSTRAINT `invitation_fk0` FOREIGN KEY (`idCommunity`) REFERENCES `community`(`id`);
 
-ALTER TABLE `Invitacion` ADD CONSTRAINT `Invitacion_fk0` FOREIGN KEY (`idComunidad`) REFERENCES `Comunidad`(`id`);
+ALTER TABLE `Comentario` ADD CONSTRAINT `Comentario_fk0` FOREIGN KEY (`idPost`) REFERENCES `post`(`id`);
 
-ALTER TABLE `Comentario` ADD CONSTRAINT `Comentario_fk0` FOREIGN KEY (`idPublicacion`) REFERENCES `Publicacion`(`id`);
+ALTER TABLE `Comentario` ADD CONSTRAINT `Comentario_fk1` FOREIGN KEY (`idUser`) REFERENCES `user`(`id`);
 
-ALTER TABLE `Comentario` ADD CONSTRAINT `Comentario_fk1` FOREIGN KEY (`idAutor`) REFERENCES `Usuario`(`id`);
+ALTER TABLE `post` ADD CONSTRAINT `post_fk0` FOREIGN KEY (`idCommunity`) REFERENCES `community`(`id`);
 
-ALTER TABLE `Publicacion` ADD CONSTRAINT `Publicacion_fk0` FOREIGN KEY (`idComunidad`) REFERENCES `Comunidad`(`id`);
+ALTER TABLE `post` ADD CONSTRAINT `post_fk1` FOREIGN KEY (`idAuthor`) REFERENCES `user`(`id`);
 
-ALTER TABLE `Publicacion` ADD CONSTRAINT `Publicacion_fk1` FOREIGN KEY (`idAutor`) REFERENCES `Usuario`(`id`);
+ALTER TABLE `post` ADD CONSTRAINT `post_fk2` FOREIGN KEY (`idVisibility`) REFERENCES `visibility`(`id`);
 
-ALTER TABLE `Publicacion` ADD CONSTRAINT `Publicacion_fk2` FOREIGN KEY (`idVisibilidad`) REFERENCES `Visibilidad`(`id`);
+ALTER TABLE `announcement` ADD CONSTRAINT `announcement_fk0` FOREIGN KEY (`idPost`) REFERENCES `post`(`id`);
 
-ALTER TABLE `Aviso` ADD CONSTRAINT `Aviso_fk0` FOREIGN KEY (`idPublicacion`) REFERENCES `Publicacion`(`id`);
+ALTER TABLE `sale` ADD CONSTRAINT `sale_fk0` FOREIGN KEY (`idPost`) REFERENCES `post`(`id`);
 
-ALTER TABLE `Venta` ADD CONSTRAINT `Venta_fk0` FOREIGN KEY (`idPublicacion`) REFERENCES `Publicacion`(`id`);
+ALTER TABLE `sale` ADD CONSTRAINT `sale_fk1` FOREIGN KEY (`idPromo`) REFERENCES `Promocion`(`id`);
 
-ALTER TABLE `Venta` ADD CONSTRAINT `Venta_fk1` FOREIGN KEY (`idPromocion`) REFERENCES `Promocion`(`id`);
+ALTER TABLE `commonExpenses` ADD CONSTRAINT `commonExpenses_fk0` FOREIGN KEY (`idCommunity`) REFERENCES `community`(`id`);
 
-ALTER TABLE `GastoComun` ADD CONSTRAINT `GastoComun_fk0` FOREIGN KEY (`idUsuarioAutor`) REFERENCES `Usuario`(`id`);
+ALTER TABLE `commonExpenses` ADD CONSTRAINT `commonExpenses_fk1` FOREIGN KEY (`idUser`) REFERENCES `user`(`id`);
 
-ALTER TABLE `GastoComun` ADD CONSTRAINT `GastoComun_fk1` FOREIGN KEY (`idUsuarioDestinatario`) REFERENCES `Usuario`(`id`);
+ALTER TABLE `commonExpenses` ADD CONSTRAINT `commonExpenses_fk2` FOREIGN KEY (`idCommonExpenseState`) REFERENCES `commonExpenseState`(`id`);
 
-ALTER TABLE `GastoComun` ADD CONSTRAINT `GastoComun_fk2` FOREIGN KEY (`idEstadoGastoComun`) REFERENCES `EstadoGastoComun`(`id`);
+ALTER TABLE `sale_category` ADD CONSTRAINT `sale_category_fk0` FOREIGN KEY (`idSale`) REFERENCES `sale`(`id`);
 
-ALTER TABLE `Venta_Categoria` ADD CONSTRAINT `Venta_Categoria_fk0` FOREIGN KEY (`idVenta`) REFERENCES `Venta`(`id`);
+ALTER TABLE `sale_category` ADD CONSTRAINT `sale_category_fk1` FOREIGN KEY (`idCategory`) REFERENCES `category`(`id`);
 
-ALTER TABLE `Venta_Categoria` ADD CONSTRAINT `Venta_Categoria_fk1` FOREIGN KEY (`idCategoria`) REFERENCES `Categoria`(`id`);
-
-ALTER TABLE `ImagenVenta` ADD CONSTRAINT `ImagenVenta_fk0` FOREIGN KEY (`idVenta`) REFERENCES `Venta`(`id`);
+ALTER TABLE `ImagenVenta` ADD CONSTRAINT `ImagenVenta_fk0` FOREIGN KEY (`idSale`) REFERENCES `sale`(`id`);
 
