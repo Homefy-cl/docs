@@ -1,6 +1,6 @@
 # noSQL Diagram
 
-# Complete Version:
+## noSQL - Interaction Diagram:
 
 <p align="center">
 <img alt="nosql diagram"
@@ -8,7 +8,7 @@
     />
 </p>
 
-# Simplified Version:
+## noSQL - Simplified DB Diagram
 
 <p align="center">
 <img alt="nosql diagram"
