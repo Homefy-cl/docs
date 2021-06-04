@@ -64,7 +64,7 @@ CREATE TABLE `announcement` (
 
 CREATE TABLE `visibility` (
 	`id` varchar(5) NOT NULL,
-	`descripcion` varchar(20) NOT NULL UNIQUE,
+	`description` varchar(20) NOT NULL UNIQUE,
 	PRIMARY KEY (`id`)
 );
 
