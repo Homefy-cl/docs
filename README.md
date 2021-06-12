@@ -1,4 +1,4 @@
-Homefy.cl Documents:
+## Homefy.cl Documents:
 ====================
 
 This repo contains:
@@ -21,3 +21,7 @@ UML:
 
 DB:
 -> Homefy.cl_mysql_DML.sql
+
+HTTP STATUS CODES
+
+[link](https://www.restapitutorial.com/httpstatuscodes.html)
