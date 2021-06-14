@@ -14,7 +14,7 @@ CREATE TABLE `community` (
 	`name` varchar(35) NOT NULL,
 	`description` varchar(50) NOT NULL,
 	`direction` varchar(50) NOT NULL,
-	`idUsuarioAdministrador` int NOT NULL,
+	`id_admin` int NOT NULL,
 	PRIMARY KEY (`id_community`)
 );
 
@@ -131,9 +131,16 @@ CREATE TABLE `imgSale` (
 	PRIMARY KEY (`id_img`)
 );
 
+CREATE TABLE `admin` (
+	`id_admin` int NOT NULL AUTO_INCREMENT,
+	`name` varchar(35) NOT NULL,
+	`id_user` int NOT NULL,
+	PRIMARY KEY (`id_admin`)
+);
+
 ALTER TABLE `user` ADD CONSTRAINT `user_fk0` FOREIGN KEY (`idUserState`) REFERENCES `userState`(`id_user_state`);
 
-ALTER TABLE `community` ADD CONSTRAINT `community_fk0` FOREIGN KEY (`idUsuarioAdministrador`) REFERENCES `user`(`id_user`);
+ALTER TABLE `community` ADD CONSTRAINT `community_fk0` FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id_admin`);
 
 ALTER TABLE `user_community` ADD CONSTRAINT `user_community_fk0` FOREIGN KEY (`idCommunity`) REFERENCES `community`(`id_community`);
 
@@ -168,4 +175,6 @@ ALTER TABLE `sale_category` ADD CONSTRAINT `sale_category_fk0` FOREIGN KEY (`id_
 ALTER TABLE `sale_category` ADD CONSTRAINT `sale_category_fk1` FOREIGN KEY (`id_category`) REFERENCES `category`(`id_category`);
 
 ALTER TABLE `imgSale` ADD CONSTRAINT `imgSale_fk0` FOREIGN KEY (`idSale`) REFERENCES `sale`(`id_sale`);
+
+ALTER TABLE `admin` ADD CONSTRAINT `admin_fk0` FOREIGN KEY (`id_user`) REFERENCES `user`(`id_user`);
 
