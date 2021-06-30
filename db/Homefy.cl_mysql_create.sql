@@ -4,13 +4,13 @@ CREATE TABLE `user` (
 	`mail` varchar(255) NOT NULL UNIQUE,
 	`password` varchar(255) NOT NULL,
 	`picURL` varchar(255) NOT NULL,
-	`idUserState` int NOT NULL,
+	`id_user_state` int NOT NULL,
 	PRIMARY KEY (`id_user`)
 );
 
 CREATE TABLE `community` (
 	`id_community` int NOT NULL AUTO_INCREMENT,
-	`maxResidents` int NOT NULL,
+	`max_residents` int NOT NULL,
 	`name` varchar(35) NOT NULL,
 	`description` varchar(50) NOT NULL,
 	`direction` varchar(50) NOT NULL,
@@ -20,8 +20,8 @@ CREATE TABLE `community` (
 
 CREATE TABLE `user_community` (
 	`id_user_community` int NOT NULL AUTO_INCREMENT,
-	`idCommunity` int NOT NULL,
-	`idUser` int NOT NULL,
+	`id_community` int NOT NULL,
+	`id_user` int NOT NULL,
 	PRIMARY KEY (`id_user_community`)
 );
 
@@ -29,8 +29,8 @@ CREATE TABLE `invitation` (
 	`id_invitation` int NOT NULL AUTO_INCREMENT,
 	`name` varchar(20) NOT NULL,
 	`token` varchar(255) NOT NULL UNIQUE,
-	`urlQR` varchar(255) NOT NULL UNIQUE,
-	`idCommunity` int NOT NULL,
+	`url_qr` varchar(255) NOT NULL UNIQUE,
+	`id_community` int NOT NULL,
 	PRIMARY KEY (`id_invitation`)
 );
 
@@ -38,8 +38,8 @@ CREATE TABLE `comment` (
 	`id_comment` int NOT NULL AUTO_INCREMENT,
 	`text` varchar(255) NOT NULL,
 	`date` DATETIME NOT NULL,
-	`idPost` int NOT NULL,
-	`idUser` int NOT NULL,
+	`id_post` int NOT NULL,
+	`id_user` int NOT NULL,
 	PRIMARY KEY (`id_comment`)
 );
 
@@ -47,25 +47,25 @@ CREATE TABLE `post` (
 	`id_post` int NOT NULL AUTO_INCREMENT,
 	`title` varchar(25) NOT NULL,
 	`text` varchar(255) NOT NULL,
-	`creationDate` DATETIME NOT NULL,
-	`idCommunity` int NOT NULL,
-	`idAuthor` int NOT NULL,
-	`idVisibility` int NOT NULL,
+	`creation_date` DATETIME NOT NULL,
+	`id_community` int NOT NULL,
+	`id_author` int NOT NULL,
+	`id_visibility` int NOT NULL,
 	PRIMARY KEY (`id_post`)
 );
 
 CREATE TABLE `announcement` (
 	`id_announcement` int NOT NULL AUTO_INCREMENT,
-	`colorHex` varchar(7) NOT NULL,
+	`color_hex` varchar(7) NOT NULL,
 	`importance` tinyint NOT NULL DEFAULT '1',
-	`idPost` int NOT NULL,
+	`id_post` int NOT NULL,
 	PRIMARY KEY (`id_announcement`)
 );
 
 CREATE TABLE `visibility` (
 	`id_visibility` int NOT NULL AUTO_INCREMENT,
 	`code` varchar(5) NOT NULL UNIQUE,
-	`description` varchar(20) NOT NULL UNIQUE,
+	`description` varchar(50) NOT NULL UNIQUE,
 	PRIMARY KEY (`id_visibility`)
 );
 
@@ -80,7 +80,7 @@ CREATE TABLE `sale` (
 CREATE TABLE `promo` (
 	`id_Promo` int NOT NULL AUTO_INCREMENT,
 	`code` varchar(5) NOT NULL UNIQUE,
-	`description` varchar(20) NOT NULL,
+	`description` varchar(50) NOT NULL,
 	PRIMARY KEY (`id_Promo`)
 );
 
@@ -91,29 +91,29 @@ CREATE TABLE `category` (
 	PRIMARY KEY (`id_category`)
 );
 
-CREATE TABLE `commonExpenses` (
+CREATE TABLE `common_expenses` (
 	`id_common_expenses` int NOT NULL AUTO_INCREMENT,
 	`price` int NOT NULL,
 	`description` varchar(50) NOT NULL,
-	`creationDate` DATE NOT NULL,
-	`dueDate` DATE NOT NULL,
-	`idCommunity` int NOT NULL,
-	`idUser` int NOT NULL,
-	`idCommonExpenseState` int NOT NULL,
+	`creation_date` DATE NOT NULL,
+	`due_date` DATE NOT NULL,
+	`id_community` int NOT NULL,
+	`id_user` int NOT NULL,
+	`id_common_expense_state` int NOT NULL,
 	PRIMARY KEY (`id_common_expenses`)
 );
 
-CREATE TABLE `commonExpenseState` (
+CREATE TABLE `common_expense_state` (
 	`id_common_expense_state` int NOT NULL AUTO_INCREMENT,
 	`code` varchar(5) NOT NULL UNIQUE,
-	`description` varchar(20) NOT NULL,
+	`description` varchar(50) NOT NULL,
 	PRIMARY KEY (`id_common_expense_state`)
 );
 
-CREATE TABLE `userState` (
+CREATE TABLE `user_state` (
 	`id_user_state` int NOT NULL AUTO_INCREMENT,
 	`code` varchar(5) NOT NULL UNIQUE,
-	`description` varchar(20) NOT NULL,
+	`description` varchar(50) NOT NULL,
 	PRIMARY KEY (`id_user_state`)
 );
 
@@ -124,10 +124,10 @@ CREATE TABLE `sale_category` (
 	PRIMARY KEY (`id_sale_category`)
 );
 
-CREATE TABLE `imgSale` (
+CREATE TABLE `img_sale` (
 	`id_img` int NOT NULL AUTO_INCREMENT,
 	`url` varchar(255) NOT NULL UNIQUE,
-	`idSale` int NOT NULL,
+	`id_sale` int NOT NULL,
 	PRIMARY KEY (`id_img`)
 );
 
@@ -138,57 +138,43 @@ CREATE TABLE `admin` (
 	PRIMARY KEY (`id_admin`)
 );
 
-ALTER TABLE `user` ADD CONSTRAINT `user_fk0` FOREIGN KEY (`idUserState`) REFERENCES `userState`(`id_user_state`);
+ALTER TABLE `user` ADD CONSTRAINT `user_fk0` FOREIGN KEY (`id_user_state`) REFERENCES `user_state`(`id_user_state`);
 
 ALTER TABLE `community` ADD CONSTRAINT `community_fk0` FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id_admin`);
 
-ALTER TABLE `user_community` ADD CONSTRAINT `user_community_fk0` FOREIGN KEY (`idCommunity`) REFERENCES `community`(`id_community`);
+ALTER TABLE `user_community` ADD CONSTRAINT `user_community_fk0` FOREIGN KEY (`id_community`) REFERENCES `community`(`id_community`);
 
-ALTER TABLE `user_community` ADD CONSTRAINT `user_community_fk1` FOREIGN KEY (`idUser`) REFERENCES `user`(`id_user`);
+ALTER TABLE `user_community` ADD CONSTRAINT `user_community_fk1` FOREIGN KEY (`id_user`) REFERENCES `user`(`id_user`);
 
-ALTER TABLE `invitation` ADD CONSTRAINT `invitation_fk0` FOREIGN KEY (`idCommunity`) REFERENCES `community`(`id_community`);
+ALTER TABLE `invitation` ADD CONSTRAINT `invitation_fk0` FOREIGN KEY (`id_community`) REFERENCES `community`(`id_community`);
 
-ALTER TABLE `comment` ADD CONSTRAINT `comment_fk0` FOREIGN KEY (`idPost`) REFERENCES `post`(`id_post`);
+ALTER TABLE `comment` ADD CONSTRAINT `comment_fk0` FOREIGN KEY (`id_post`) REFERENCES `post`(`id_post`);
 
-ALTER TABLE `comment` ADD CONSTRAINT `comment_fk1` FOREIGN KEY (`idUser`) REFERENCES `user`(`id_user`);
+ALTER TABLE `comment` ADD CONSTRAINT `comment_fk1` FOREIGN KEY (`id_user`) REFERENCES `user`(`id_user`);
 
-ALTER TABLE `post` ADD CONSTRAINT `post_fk0` FOREIGN KEY (`idCommunity`) REFERENCES `community`(`id_community`);
+ALTER TABLE `post` ADD CONSTRAINT `post_fk0` FOREIGN KEY (`id_community`) REFERENCES `community`(`id_community`);
 
-ALTER TABLE `post` ADD CONSTRAINT `post_fk1` FOREIGN KEY (`idAuthor`) REFERENCES `user`(`id_user`);
+ALTER TABLE `post` ADD CONSTRAINT `post_fk1` FOREIGN KEY (`id_author`) REFERENCES `user`(`id_user`);
 
-ALTER TABLE `post` ADD CONSTRAINT `post_fk2` FOREIGN KEY (`idVisibility`) REFERENCES `visibility`(`id_visibility`);
+ALTER TABLE `post` ADD CONSTRAINT `post_fk2` FOREIGN KEY (`id_visibility`) REFERENCES `visibility`(`id_visibility`);
 
-ALTER TABLE `announcement` ADD CONSTRAINT `announcement_fk0` FOREIGN KEY (`idPost`) REFERENCES `post`(`id_post`);
+ALTER TABLE `announcement` ADD CONSTRAINT `announcement_fk0` FOREIGN KEY (`id_post`) REFERENCES `post`(`id_post`);
 
 ALTER TABLE `sale` ADD CONSTRAINT `sale_fk0` FOREIGN KEY (`id_post`) REFERENCES `post`(`id_post`);
 
 ALTER TABLE `sale` ADD CONSTRAINT `sale_fk1` FOREIGN KEY (`id_promo`) REFERENCES `promo`(`id_Promo`);
 
-ALTER TABLE `commonExpenses` ADD CONSTRAINT `commonExpenses_fk0` FOREIGN KEY (`idCommunity`) REFERENCES `community`(`id_community`);
+ALTER TABLE `common_expenses` ADD CONSTRAINT `common_expenses_fk0` FOREIGN KEY (`id_community`) REFERENCES `community`(`id_community`);
 
-ALTER TABLE `commonExpenses` ADD CONSTRAINT `commonExpenses_fk1` FOREIGN KEY (`idUser`) REFERENCES `user`(`id_user`);
+ALTER TABLE `common_expenses` ADD CONSTRAINT `common_expenses_fk1` FOREIGN KEY (`id_user`) REFERENCES `user`(`id_user`);
 
-ALTER TABLE `commonExpenses` ADD CONSTRAINT `commonExpenses_fk2` FOREIGN KEY (`idCommonExpenseState`) REFERENCES `commonExpenseState`(`id_common_expense_state`);
+ALTER TABLE `common_expenses` ADD CONSTRAINT `common_expenses_fk2` FOREIGN KEY (`id_common_expense_state`) REFERENCES `common_expense_state`(`id_common_expense_state`);
 
 ALTER TABLE `sale_category` ADD CONSTRAINT `sale_category_fk0` FOREIGN KEY (`id_sale`) REFERENCES `sale`(`id_sale`);
 
 ALTER TABLE `sale_category` ADD CONSTRAINT `sale_category_fk1` FOREIGN KEY (`id_category`) REFERENCES `category`(`id_category`);
 
-ALTER TABLE `imgSale` ADD CONSTRAINT `imgSale_fk0` FOREIGN KEY (`idSale`) REFERENCES `sale`(`id_sale`);
+ALTER TABLE `img_sale` ADD CONSTRAINT `img_sale_fk0` FOREIGN KEY (`id_sale`) REFERENCES `sale`(`id_sale`);
 
 ALTER TABLE `admin` ADD CONSTRAINT `admin_fk0` FOREIGN KEY (`id_user`) REFERENCES `user`(`id_user`);
 
-
-/*Inserts*/
-/*User Stat*/ 
-INSERT INTO `userState` (`id_user_state`, `code`, `description`) VALUES (NULL, 'USER', 'User account.');
-INSERT INTO `userState` (`id_user_state`, `code`, `description`) VALUES (NULL, 'ADMIN', 'Community Admin');
-
-/*Common Expense State*/
-INSERT INTO `commonExpenseState` (`id_common_expense_state`, `code`, `description`) VALUES (NULL, 'PAID', 'Paid Common Expense');
-INSERT INTO `commonExpenseState` (`id_common_expense_state`, `code`, `description`) VALUES (NULL, 'OVRD', 'Overdue');
-INSERT INTO `commonExpenseState` (`id_common_expense_state`, `code`, `description`) VALUES (NULL, 'NPAID', 'Not Paid');
-
-/*Visibility*/
-INSERT INTO `visibility` (`id_visibility`, `code`, `description`) VALUES (NULL, 'PBLIC', 'Public post');
-INSERT INTO `visibility` (`id_visibility`, `code`, `description`) VALUES (NULL, 'HIDDN', 'Hidden Post');
