@@ -178,3 +178,18 @@ ALTER TABLE `img_sale` ADD CONSTRAINT `img_sale_fk0` FOREIGN KEY (`id_sale`) REF
 
 ALTER TABLE `admin` ADD CONSTRAINT `admin_fk0` FOREIGN KEY (`id_user`) REFERENCES `user`(`id_user`);
 
+
+ /*Inserts*/
+/*User Stat*/ 
+INSERT INTO `user_state` (`id_user_state`, `code`, `description`) VALUES (NULL, 'USER', 'User account.');
+INSERT INTO `user_state` (`id_user_state`, `code`, `description`) VALUES (NULL, 'ADMIN', 'Community Admin');
+
+/*Common Expense State*/
+INSERT INTO `common_expense_state` (`id_common_expense_state`, `code`, `description`) VALUES (NULL, 'PAID', 'Paid Common Expense');
+INSERT INTO `common_expense_state` (`id_common_expense_state`, `code`, `description`) VALUES (NULL, 'OVRD', 'Overdue');
+INSERT INTO `common_expense_state` (`id_common_expense_state`, `code`, `description`) VALUES (NULL, 'NPAID', 'Not Paid');
+
+/*Visibility*/
+INSERT INTO `visibility` (`id_visibility`, `code`, `description`) VALUES (NULL, 'PBLIC', 'Public post');
+INSERT INTO `visibility` (`id_visibility`, `code`, `description`) VALUES (NULL, 'HIDDN', 'Hidden Post');
+
