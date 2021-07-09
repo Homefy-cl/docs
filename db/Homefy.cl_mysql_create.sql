@@ -83,3 +83,5 @@ ALTER TABLE `common_expenses` ADD CONSTRAINT `common_expenses_fk1` FOREIGN KEY (
 
 ALTER TABLE `img_sale` ADD CONSTRAINT `img_sale_fk0` FOREIGN KEY (`id_sale`) REFERENCES `sale`(`id_sale`);
 
+
+INSERT INTO `community` (`id_community`, `name`, `direction`) VALUES (1, 'Bloodborne', 'Yharnam 323');
