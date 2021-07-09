@@ -193,3 +193,9 @@ INSERT INTO `common_expense_state` (`id_common_expense_state`, `code`, `descript
 INSERT INTO `visibility` (`id_visibility`, `code`, `description`) VALUES (NULL, 'PBLIC', 'Public post');
 INSERT INTO `visibility` (`id_visibility`, `code`, `description`) VALUES (NULL, 'HIDDN', 'Hidden Post');
 
+/*Users*/
+INSERT INTO `user` (`id_user`, `name`, `mail`, `password`, `picURL`, `id_user_state`) VALUES (1, 'Admin', 'admin@homefy.cl', '1234', 'Test', 2);
+INSERT INTO `user` (`id_user`, `name`, `mail`, `password`, `picURL`, `id_user_state`) VALUES (2, 'Pedro Escalona', 'p.escalona@homefy.cl, '1234', 'Test', 1);
+INSERT INTO `user` (`id_user`, `name`, `mail`, `password`, `picURL`, `id_user_state`) VALUES (3, 'Armando Casas', 'armando@casas.cl', '1234', 'Test', 1);
+
+/*Admin*/
