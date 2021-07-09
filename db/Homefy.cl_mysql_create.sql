@@ -11,7 +11,6 @@ CREATE TABLE `community` (
 	`id_community` int NOT NULL AUTO_INCREMENT,
 	`name` varchar(35) NOT NULL,
 	`direction` varchar(50) NOT NULL,
-	`id_admin` int NOT NULL,
 	PRIMARY KEY (`id_community`)
 );
 
@@ -69,8 +68,6 @@ CREATE TABLE `img_sale` (
 	`id_sale` int NOT NULL,
 	PRIMARY KEY (`id_img`)
 );
-
-ALTER TABLE `community` ADD CONSTRAINT `community_fk0` FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id_admin`);
 
 ALTER TABLE `user_community` ADD CONSTRAINT `user_community_fk0` FOREIGN KEY (`id_community`) REFERENCES `community`(`id_community`);
 
