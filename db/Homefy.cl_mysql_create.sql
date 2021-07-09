@@ -29,26 +29,22 @@ CREATE TABLE `invitation` (
 	PRIMARY KEY (`id_invitation`)
 );
 
-CREATE TABLE `post` (
-	`id_post` int NOT NULL AUTO_INCREMENT,
-	`title` varchar(25) NOT NULL,
-	`text` varchar(255) NOT NULL,
-	`id_community` int NOT NULL,
-	`id_author` int NOT NULL,
-	PRIMARY KEY (`id_post`)
-);
-
 CREATE TABLE `announcement` (
 	`id_announcement` int NOT NULL AUTO_INCREMENT,
+	`title` varchar(25) NOT NULL,
+	`text` varchar(255) NOT NULL,
 	`color_hex` varchar(7) NOT NULL,
-	`id_post` int NOT NULL,
+	`id_community` int NOT NULL,
 	PRIMARY KEY (`id_announcement`)
 );
 
 CREATE TABLE `sale` (
 	`id_sale` int NOT NULL AUTO_INCREMENT,
+	`title` varchar(30) NOT NULL,
+	`text` varchar(255) NOT NULL,
 	`price` int NOT NULL,
-	`id_post` int NOT NULL,
+	`id_community` int NOT NULL,
+	`id_author` int NOT NULL,
 	PRIMARY KEY (`id_sale`)
 );
 
@@ -75,13 +71,11 @@ ALTER TABLE `user_community` ADD CONSTRAINT `user_community_fk1` FOREIGN KEY (`i
 
 ALTER TABLE `invitation` ADD CONSTRAINT `invitation_fk0` FOREIGN KEY (`id_community`) REFERENCES `community`(`id_community`);
 
-ALTER TABLE `post` ADD CONSTRAINT `post_fk0` FOREIGN KEY (`id_community`) REFERENCES `community`(`id_community`);
+ALTER TABLE `announcement` ADD CONSTRAINT `announcement_fk0` FOREIGN KEY (`id_community`) REFERENCES `community`(`id_community`);
 
-ALTER TABLE `post` ADD CONSTRAINT `post_fk1` FOREIGN KEY (`id_author`) REFERENCES `user`(`id_user`);
+ALTER TABLE `sale` ADD CONSTRAINT `sale_fk0` FOREIGN KEY (`id_community`) REFERENCES `community`(`id_community`);
 
-ALTER TABLE `announcement` ADD CONSTRAINT `announcement_fk0` FOREIGN KEY (`id_post`) REFERENCES `post`(`id_post`);
-
-ALTER TABLE `sale` ADD CONSTRAINT `sale_fk0` FOREIGN KEY (`id_post`) REFERENCES `post`(`id_post`);
+ALTER TABLE `sale` ADD CONSTRAINT `sale_fk1` FOREIGN KEY (`id_author`) REFERENCES `user`(`id_user`);
 
 ALTER TABLE `common_expenses` ADD CONSTRAINT `common_expenses_fk0` FOREIGN KEY (`id_community`) REFERENCES `community`(`id_community`);
 
