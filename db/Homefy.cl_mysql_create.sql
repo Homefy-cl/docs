@@ -1,6 +1,6 @@
 CREATE TABLE `user` (
 	`id_user` int NOT NULL AUTO_INCREMENT,
-	`name` varchar(35) NOT NULL,
+	`name` varchar(50) NOT NULL,
 	`mail` varchar(255) NOT NULL UNIQUE,
 	`password` varchar(255) NOT NULL,
 	`picURL` varchar(255),
@@ -9,8 +9,8 @@ CREATE TABLE `user` (
 
 CREATE TABLE `community` (
 	`id_community` int NOT NULL AUTO_INCREMENT,
-	`name` varchar(35) NOT NULL,
-	`direction` varchar(50) NOT NULL,
+	`name` varchar(50) NOT NULL,
+	`direction` varchar(100) NOT NULL,
 	PRIMARY KEY (`id_community`)
 );
 
@@ -23,7 +23,7 @@ CREATE TABLE `user_community` (
 
 CREATE TABLE `invitation` (
 	`id_invitation` int NOT NULL AUTO_INCREMENT,
-	`name` varchar(20) NOT NULL,
+	`name` varchar(50) NOT NULL,
 	`token` varchar(255) NOT NULL UNIQUE,
 	`id_community` int NOT NULL,
 	PRIMARY KEY (`id_invitation`)
@@ -31,7 +31,7 @@ CREATE TABLE `invitation` (
 
 CREATE TABLE `announcement` (
 	`id_announcement` int NOT NULL AUTO_INCREMENT,
-	`title` varchar(25) NOT NULL,
+	`title` varchar(50) NOT NULL,
 	`text` varchar(255) NOT NULL,
 	`color_hex` varchar(7) NOT NULL,
 	`id_community` int NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE `announcement` (
 
 CREATE TABLE `sale` (
 	`id_sale` int NOT NULL AUTO_INCREMENT,
-	`title` varchar(30) NOT NULL,
+	`title` varchar(50) NOT NULL,
 	`text` varchar(255) NOT NULL,
 	`price` int NOT NULL,
 	`id_community` int NOT NULL,
