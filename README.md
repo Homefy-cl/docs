@@ -21,10 +21,9 @@ UML:
 
 DB:
 -> Homefy.cl_mysql_DML.sql
+---
 
-HTTP STATUS CODES
+## Referencias
 
-[link](https://www.restapitutorial.com/httpstatuscodes.html)
-
-Importancia de anuncios, tomar referencia badges de bootstrap:
-[link](https://www.w3schools.com/bootstrap4/bootstrap_badges.asp)
++ HTTP STATUS CODES - [link](https://www.restapitutorial.com/httpstatuscodes.html)
++ Importancia de anuncios, tomar referencia badges de bootstrap - [link](https://www.w3schools.com/bootstrap4/bootstrap_badges.asp)
