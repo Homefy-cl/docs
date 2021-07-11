@@ -33,7 +33,7 @@ CREATE TABLE `announcement` (
 	`id_announcement` int NOT NULL AUTO_INCREMENT,
 	`title` varchar(50) NOT NULL,
 	`text` varchar(255) NOT NULL,
-	`color_hex` varchar(7) NOT NULL,
+	`date` DATE NOT NULL,
 	`id_community` int NOT NULL,
 	PRIMARY KEY (`id_announcement`)
 );
