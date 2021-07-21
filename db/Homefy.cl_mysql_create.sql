@@ -51,7 +51,7 @@ CREATE TABLE `sale` (
 CREATE TABLE `common_expenses` (
 	`id_common_expenses` int NOT NULL AUTO_INCREMENT,
 	`price` int NOT NULL,
-	`description` varchar(50),
+	`description` varchar(150),
 	`due_date` DATE NOT NULL,
 	`id_community` int NOT NULL,
 	`id_user` int NOT NULL,
@@ -84,4 +84,10 @@ ALTER TABLE `common_expenses` ADD CONSTRAINT `common_expenses_fk1` FOREIGN KEY (
 ALTER TABLE `img_sale` ADD CONSTRAINT `img_sale_fk0` FOREIGN KEY (`id_sale`) REFERENCES `sale`(`id_sale`);
 
 
-INSERT INTO `community` (`id_community`, `name`, `direction`) VALUES (1, 'Bloodborne', 'Yharnam 323');
+INSERT INTO `community` (`id_community`, `name`, `direction`) 
+VALUES (1, 'Bloodborne', 'Yharnam 323');
+
+INSERT INTO `common_expenses` (`id_common_expenses`, `price`, `description`, `due_date`, `id_community`, `id_user`) VALUES
+(1, 50000, 'Gasto común de prueba para probar los componentes creados.', '2021-07-20', 1, 1),
+(2, 80000, 'Gasto común de prueba para probar los componentes creados.', '2021-02-03', 1, 1);
+(3, 15000, 'Gasto común de prueba para probar los componentes creados.', '2021-06-18', 1, 1);
