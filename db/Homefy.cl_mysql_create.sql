@@ -84,10 +84,11 @@ ALTER TABLE `common_expenses` ADD CONSTRAINT `common_expenses_fk1` FOREIGN KEY (
 ALTER TABLE `img_sale` ADD CONSTRAINT `img_sale_fk0` FOREIGN KEY (`id_sale`) REFERENCES `sale`(`id_sale`);
 
 
-INSERT INTO `community` (`id_community`, `name`, `direction`) 
-VALUES (1, 'Bloodborne', 'Yharnam 323');
+INSERT INTO `user` (`id_user`, `name`, `mail`, `password`, `picURL`) VALUES (NULL, 'test', 'test@test.cl', 'test', 'test');
+
+INSERT INTO `community` (`id_community`, `name`, `direction`) VALUES (1, 'Bloodborne', 'Yharnam 323');
 
 INSERT INTO `common_expenses` (`id_common_expenses`, `price`, `description`, `due_date`, `id_community`, `id_user`) VALUES
 (1, 50000, 'Gasto común de prueba para probar los componentes creados.', '2021-07-20', 1, 1),
-(2, 80000, 'Gasto común de prueba para probar los componentes creados.', '2021-02-03', 1, 1);
+(2, 80000, 'Gasto común de prueba para probar los componentes creados.', '2021-02-03', 1, 1),
 (3, 15000, 'Gasto común de prueba para probar los componentes creados.', '2021-06-18', 1, 1);
